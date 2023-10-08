@@ -85,6 +85,8 @@ dependencies {
 
     implementation("io.github.raamcosta.compose-destinations:core:1.8.42-beta")
     ksp("io.github.raamcosta.compose-destinations:ksp:1.8.42-beta")
+
+    implementation("androidx.compose.material:material-icons-extended")
 }
 
 kapt {
