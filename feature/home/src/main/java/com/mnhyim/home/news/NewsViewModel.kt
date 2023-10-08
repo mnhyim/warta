@@ -20,8 +20,15 @@ class NewsViewModel @Inject constructor(
     private var _state = MutableStateFlow(NewsState())
     val state = _state.asStateFlow()
 
+    init {
+        getTopHeadlines()
+    }
+
     fun getTopHeadlines() {
-        newsUseCases.getTopHeadlines().onEach { result ->
+        newsUseCases.getTopHeadlines(
+            country = "id",
+            page = state.value.currentPage
+        ).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     result.content?.let { topHeadlines ->
@@ -30,12 +37,8 @@ class NewsViewModel @Inject constructor(
                         }
                     }
                 }
-                is Resource.Loading -> {
-                    _state.update { it.copy(isLoading = true) }
-                }
-                is Resource.Error -> {
-                    _state.update { it.copy(isLoading = false) }
-                }
+                is Resource.Loading -> _state.update { it.copy(isLoading = true) }
+                is Resource.Error -> _state.update { it.copy(isLoading = false) }
             }
         }.launchIn(viewModelScope)
     }

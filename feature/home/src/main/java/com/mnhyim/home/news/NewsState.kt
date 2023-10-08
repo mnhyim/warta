@@ -4,5 +4,6 @@ import com.mnhyim.domain.model.ArticleModel
 
 data class NewsState(
     val isLoading: Boolean = true,
+    val currentPage: Int = 1,
     val articles: List<ArticleModel> = emptyList()
 )

@@ -21,5 +21,5 @@ data class Article(
     @Json(name = "url")
     val url: String?,
     @Json(name = "urlToImage")
-    val urlToImage: Any?
+    val urlToImage: String?
 )

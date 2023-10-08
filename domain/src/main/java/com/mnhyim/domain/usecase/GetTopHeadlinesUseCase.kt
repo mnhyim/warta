@@ -11,10 +11,10 @@ import javax.inject.Inject
 class GetTopHeadlinesUseCase(
     private val repository: NewsRepository
 ) {
-    operator fun invoke(): Flow<Resource<TopHeadlinesModel>> = flow {
+    operator fun invoke(country: String, page: Int): Flow<Resource<TopHeadlinesModel>> = flow {
         try {
             emit(Resource.Loading())
-            val result = repository.getTopHeadlines()
+            val result = repository.getTopHeadlines(country = country, page = page)
             emit(Resource.Success(result))
         } catch (e: Exception) {
             emit(Resource.Error("Exception - ${e.localizedMessage}"))
