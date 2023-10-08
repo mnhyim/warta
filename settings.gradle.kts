@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "warta"
 include(":app")
+include(":data:network")
