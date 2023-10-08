@@ -3,11 +3,19 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+
 }
 
 android {
     namespace = "com.mnhyim.warta"
     compileSdk = 34
+
+    applicationVariants.all {
+        addJavaSourceFoldersToModel(
+            File(buildDir, "generated/ksp/$name/kotlin")
+        )
+    }
 
     defaultConfig {
         applicationId = "com.mnhyim.warta"
@@ -73,6 +81,9 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation("io.github.raamcosta.compose-destinations:core:1.8.42-beta")
+    ksp("io.github.raamcosta.compose-destinations:ksp:1.8.42-beta")
 }
 
 kapt {
