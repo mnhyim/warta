@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Article(
+data class ArticleResponse(
     @Json(name = "author")
     val author: String,
     @Json(name = "content")
@@ -15,7 +15,7 @@ data class Article(
     @Json(name = "publishedAt")
     val publishedAt: String,
     @Json(name = "source")
-    val source: Source,
+    val source: SourceResponse,
     @Json(name = "title")
     val title: String,
     @Json(name = "url")
