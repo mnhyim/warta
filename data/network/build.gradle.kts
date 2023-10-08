@@ -53,6 +53,9 @@ dependencies {
 
     implementation("com.jakewharton.timber:timber:5.0.1")
 
+    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")

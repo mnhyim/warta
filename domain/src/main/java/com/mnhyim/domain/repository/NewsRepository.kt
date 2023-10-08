@@ -1,7 +1,9 @@
 package com.mnhyim.domain.repository
 
-import com.mnhyim.domain.model.TopHeadlinesModel
+import androidx.paging.PagingData
+import com.mnhyim.domain.model.ArticleModel
+import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
-    suspend fun getTopHeadlines(country: String, page: Int): TopHeadlinesModel
+    fun getCryptoNews(): Flow<PagingData<ArticleModel>>
 }

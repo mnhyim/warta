@@ -1,7 +1,7 @@
 package com.mnhyim.domain.di
 
 import com.mnhyim.domain.repository.NewsRepository
-import com.mnhyim.domain.usecase.GetTopHeadlinesUseCase
+import com.mnhyim.domain.usecase.GetCryptoNews
 import com.mnhyim.domain.usecase.NewsUseCases
 import dagger.Module
 import dagger.Provides
@@ -17,7 +17,7 @@ object UseCaseModule {
     @Provides
     fun provideNewsUseCases(repository: NewsRepository): NewsUseCases {
         return NewsUseCases(
-            getTopHeadlines = GetTopHeadlinesUseCase(repository)
+            getCryptoNews = GetCryptoNews(repository)
         )
     }
 }

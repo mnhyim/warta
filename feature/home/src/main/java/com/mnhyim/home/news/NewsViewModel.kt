@@ -1,15 +1,13 @@
 package com.mnhyim.home.news
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import com.mnhyim.domain.model.ArticleModel
 import com.mnhyim.domain.usecase.NewsUseCases
-import com.mnhyim.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,25 +19,28 @@ class NewsViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        getTopHeadlines()
+//        getTopHeadlines()
     }
 
-    fun getTopHeadlines() {
-        newsUseCases.getTopHeadlines(
-            country = "id",
-            page = state.value.currentPage
-        ).onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    result.content?.let { topHeadlines ->
-                        _state.update {
-                            it.copy(isLoading = false, articles = topHeadlines.articlesModel)
-                        }
-                    }
-                }
-                is Resource.Loading -> _state.update { it.copy(isLoading = true) }
-                is Resource.Error -> _state.update { it.copy(isLoading = false) }
-            }
-        }.launchIn(viewModelScope)
-    }
+    fun getCryptoNews(): Flow<PagingData<ArticleModel>> = newsUseCases.getCryptoNews()
+
+
+//    fun getTopHeadlines() {
+//        newsUseCases.getTopHeadlines(
+//            country = "id",
+//            page = state.value.currentPage
+//        ).onEach { result ->
+//            when (result) {
+//                is Resource.Success -> {
+//                    result.content?.let { topHeadlines ->
+//                        _state.update {
+//                            it.copy(isLoading = false, articles = topHeadlines.articlesModel)
+//                        }
+//                    }
+//                }
+//                is Resource.Loading -> _state.update { it.copy(isLoading = true) }
+//                is Resource.Error -> _state.update { it.copy(isLoading = false) }
+//            }
+//        }.launchIn(viewModelScope)
+//    }
 }

@@ -54,6 +54,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android-gradle-plugin:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
