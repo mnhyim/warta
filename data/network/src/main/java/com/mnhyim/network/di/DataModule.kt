@@ -1,6 +1,8 @@
 package com.mnhyim.network.di
 
+import com.mnhyim.domain.repository.NewsRepository
 import com.mnhyim.network.NewsApi
+import com.mnhyim.network.repository.NewsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,32 +11,32 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+object DataModule {
+
 
     @Provides
     @Singleton
     fun provideNewsApi(): NewsApi {
-        val mHttpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
-
-        fun okhttpClient(): OkHttpClient {
-            return OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.SECONDS)
-                .readTimeout(5, TimeUnit.SECONDS)
-                .addInterceptor(mHttpLoggingInterceptor)
-                .build()
-        }
-
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .build()
         return Retrofit.Builder()
             .baseUrl("https://newsapi.org" + "/v2/")
             .addConverterFactory(MoshiConverterFactory.create())
-            .client(okhttpClient())
+            .client(client)
             .build()
             .create(NewsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsRepository(api: NewsApi): NewsRepository {
+        return NewsRepositoryImpl(api)
     }
 }

@@ -1,13 +1,10 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
 }
 
 android {
-    namespace = "com.mnhyim.network"
+    namespace = "com.mnhyim.utils"
     compileSdk = 33
 
     defaultConfig {
@@ -36,22 +33,6 @@ android {
 }
 
 dependencies {
-
-    implementation(project(":domain"))
-    implementation(project(":common:utils"))
-
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
-    implementation("com.squareup.moshi:moshi:1.15.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
-
-    implementation("com.google.dagger:hilt-android:2.44")
-    implementation("com.google.dagger:hilt-android-gradle-plugin:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
-
-    implementation("com.jakewharton.timber:timber:5.0.1")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
