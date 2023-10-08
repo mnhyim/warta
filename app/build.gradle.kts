@@ -87,6 +87,8 @@ dependencies {
     ksp("io.github.raamcosta.compose-destinations:ksp:1.8.42-beta")
 
     implementation("androidx.compose.material:material-icons-extended")
+
+    implementation("com.jakewharton.timber:timber:5.0.1")
 }
 
 kapt {
