@@ -17,3 +17,4 @@ rootProject.name = "warta"
 include(":app")
 include(":data:network")
 include(":common:ui")
+include(":feature:home")
