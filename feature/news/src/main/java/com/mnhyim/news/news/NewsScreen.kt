@@ -47,7 +47,10 @@ fun NewsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .clip(RoundedCornerShape(0.dp, 0.dp, 16.dp, 16.dp))
-                .background(MaterialTheme.colorScheme.primary,  RoundedCornerShape(0.dp, 0.dp, 16.dp, 16.dp))
+                .background(
+                    MaterialTheme.colorScheme.primary,
+                    RoundedCornerShape(0.dp, 0.dp, 16.dp, 16.dp)
+                )
         ) {
             Text(
                 text = newsSourceName,
@@ -94,9 +97,7 @@ fun NewsScreen(
             }
 
             when (val state = news.loadState.refresh) {
-                is LoadState.Error -> {
-                    Log.d("Paging", "E: ${state.error}")
-                }
+                is LoadState.Error -> Log.d("Paging", "E: ${state.error}")
 
                 is LoadState.Loading -> {
                     item {
@@ -113,9 +114,7 @@ fun NewsScreen(
             }
 
             when (val state = news.loadState.append) {
-                is LoadState.Error -> {
-                    Log.d("Paging", "E: ${state.error}")
-                }
+                is LoadState.Error -> Log.d("Paging", "E: ${state.error}")
 
                 is LoadState.Loading -> {
                     item {

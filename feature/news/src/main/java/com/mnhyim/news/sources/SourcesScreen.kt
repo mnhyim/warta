@@ -78,9 +78,7 @@ fun SourcesScreen(
             }
 
             when (val state = sources.loadState.refresh) {
-                is LoadState.Error -> {
-                    Log.d("Paging", "E: ${state.error}")
-                }
+                is LoadState.Error -> Log.d("Paging", "E: ${state.error}")
 
                 is LoadState.Loading -> {
                     item {
@@ -97,9 +95,7 @@ fun SourcesScreen(
             }
 
             when (val state = sources.loadState.append) {
-                is LoadState.Error -> {
-                    Log.d("Paging", "E: ${state.error}")
-                }
+                is LoadState.Error -> Log.d("Paging", "E: ${state.error}")
 
                 is LoadState.Loading -> {
                     item {

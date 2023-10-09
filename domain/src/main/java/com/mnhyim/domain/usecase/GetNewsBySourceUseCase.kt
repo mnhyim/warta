@@ -8,5 +8,6 @@ import kotlinx.coroutines.flow.Flow
 class GetNewsBySourceUseCase(
     private val repository: NewsRepository,
 ) {
-    operator fun invoke(source: String): Flow<PagingData<ArticleModel>> = repository.getNewsBySource(source)
+    operator fun invoke(source: String): Flow<PagingData<ArticleModel>> =
+        repository.getNewsBySource(source)
 }

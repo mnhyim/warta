@@ -2,8 +2,8 @@ package com.mnhyim.network.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.mnhyim.network.NewsApi
 import com.mnhyim.domain.model.articles.ArticleModel
+import com.mnhyim.network.NewsApi
 import java.text.SimpleDateFormat
 import java.util.Locale
 

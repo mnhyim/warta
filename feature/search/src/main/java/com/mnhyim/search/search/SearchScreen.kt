@@ -24,7 +24,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
-import com.mnhyim.search.components.OpenSearchWebView
 import com.mnhyim.search.destinations.OpenSearchWebViewDestination
 import com.mnhyim.ui.components.NewsCardItem
 import com.ramcosta.composedestinations.annotation.Destination
@@ -54,7 +53,7 @@ fun SearchScreen(
             textAlign = TextAlign.Center,
             fontFamily = FontFamily.Serif,
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(16.dp)d
+            modifier = Modifier.padding(16.dp)
         )
         SearchBar(
             text = searchQuery,
@@ -92,9 +91,7 @@ fun SearchScreen(
                 }
 
                 when (val state = news.loadState.refresh) {
-                    is LoadState.Error -> {
-                        Log.d("Paging", "E: ${state.error}")
-                    }
+                    is LoadState.Error -> Log.d("Paging", "E: ${state.error}")
 
                     is LoadState.Loading -> {
                         item {
@@ -118,9 +115,7 @@ fun SearchScreen(
                 }
 
                 when (val state = news.loadState.append) {
-                    is LoadState.Error -> {
-                        Log.d("Paging", "E: ${state.error}")
-                    }
+                    is LoadState.Error -> Log.d("Paging", "E: ${state.error}")
 
                     is LoadState.Loading -> {
                         item {

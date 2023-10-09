@@ -37,7 +37,7 @@ fun NewsCardItem(
                 fontFamily = FontFamily.Serif,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.inversePrimary,)
+                    .background(MaterialTheme.colorScheme.inversePrimary)
                     .padding(8.dp, 8.dp)
             )
             Spacer(modifier = Modifier.weight(1f))

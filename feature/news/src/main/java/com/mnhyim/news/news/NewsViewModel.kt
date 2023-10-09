@@ -11,9 +11,10 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     private val newsUseCases: NewsUseCases
-): ViewModel() {
+) : ViewModel() {
 
 
-    fun getNews(source: String): Flow<PagingData<ArticleModel>> = newsUseCases.getNewsBySourceUseCase(source)
+    fun getNews(source: String): Flow<PagingData<ArticleModel>> =
+        newsUseCases.getNewsBySourceUseCase(source)
 
 }
