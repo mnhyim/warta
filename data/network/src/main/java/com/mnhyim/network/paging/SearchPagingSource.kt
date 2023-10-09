@@ -2,14 +2,15 @@ package com.mnhyim.network.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.mnhyim.network.NewsApi
 import com.mnhyim.domain.model.articles.ArticleModel
+import com.mnhyim.network.NewsApi
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class NewsPagingSource(
+class SearchPagingSource(
     private val newsApi: NewsApi,
-    private val source: String
+    private val query: String,
+    private val sources: String
 ) : PagingSource<Int, ArticleModel>() {
     override fun getRefreshKey(state: PagingState<Int, ArticleModel>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -18,12 +19,12 @@ class NewsPagingSource(
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleModel> {
+    override suspend fun load(params: PagingSource.LoadParams<Int>): PagingSource.LoadResult<Int, ArticleModel> {
         return try {
             val page = params.key ?: 1
-            val response = newsApi.getTopHeadlines(sources = source, page = page)
+            val response = newsApi.searchNews(query = query, sources = sources, page = page)
 
-            LoadResult.Page(
+            PagingSource.LoadResult.Page(
                 data = response.articles.map { article ->
                     ArticleModel(
                         author = article.author ?: "-",
@@ -40,7 +41,7 @@ class NewsPagingSource(
                 nextKey = if (response.articles.isEmpty()) null else page.plus(1),
             )
         } catch (e: Exception) {
-            LoadResult.Error(e)
+            PagingSource.LoadResult.Error(e)
         }
     }
 }

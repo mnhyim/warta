@@ -7,7 +7,6 @@ import retrofit2.http.Query
 
 interface NewsApi {
 
-
     @GET("top-headlines/sources")
     suspend fun getSources(
         @Query("category") category: String,
@@ -21,7 +20,8 @@ interface NewsApi {
     @GET("everything")
     suspend fun searchNews(
         @Query("page") page: Int,
-        @Query("q") country: String,
+        @Query("q") query: String?,
+        @Query("sources") sources: String?,
         @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
@@ -29,7 +29,7 @@ interface NewsApi {
 
     @GET("top-headlines")
     suspend fun getTopHeadlines(
-        @Query("sources") source: String,
+        @Query("sources") sources: String,
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int = 5,
         @Query("sortBy") sortBy: String = "popularity",
