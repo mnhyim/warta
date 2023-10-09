@@ -77,6 +77,6 @@ dependencies {
 }
 ksp {
     arg("compose-destinations.mode", "navgraphs")
-    arg("compose-destinations.moduleName", "home")
+    arg("compose-destinations.moduleName", "news")
     arg("compose-destinations.useComposableVisibility", "true")
 }

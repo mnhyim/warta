@@ -1,10 +1,12 @@
-package com.mnhyim.news.search
+package com.mnhyim.search.search
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import com.mnhyim.domain.model.articles.ArticleModel
 import com.mnhyim.domain.usecase.NewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,6 +29,7 @@ class SearchViewModel @Inject constructor(
     fun changeSearchQuery(query: String) = _search.update { query }
     fun changeSearchMode(boolean: Boolean) = _searchMode.update { boolean }
 
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     fun searchNews(query: String): Flow<PagingData<ArticleModel>> =
         search.debounce(800).flatMapLatest {
             if (searchMode.value) {

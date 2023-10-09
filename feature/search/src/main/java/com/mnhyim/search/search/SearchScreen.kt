@@ -1,4 +1,4 @@
-package com.mnhyim.news.search
+package com.mnhyim.search.search
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -23,12 +23,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
-import com.mnhyim.news.components.SearchBar
-import com.mnhyim.news.destinations.OpenWebViewDestination
-import com.mnhyim.news.news.NewsCardItem
+import com.mnhyim.search.components.OpenSearchWebView
+import com.mnhyim.search.destinations.OpenSearchWebViewDestination
+import com.mnhyim.ui.components.NewsCardItem
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@RootNavGraph(start = true)
 @Destination
 @Composable
 fun SearchScreen(
@@ -76,9 +78,12 @@ fun SearchScreen(
                 ) { index ->
                     news[index]?.let { article ->
                         NewsCardItem(
-                            item = article,
+                            articleUrl = article.url,
+                            articleTitle = article.title,
+                            articlePublishedAt = article.publishedAt,
+                            articleDescription = article.description,
                             onClick = {
-                                navigator.navigate(OpenWebViewDestination(it))
+                                navigator.navigate(OpenSearchWebViewDestination(it))
                             }
                         )
                     }

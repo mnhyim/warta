@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
+import com.mnhyim.ui.components.NewsCardItem
 import com.mnhyim.news.destinations.OpenWebViewDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -37,7 +38,6 @@ fun NewsScreen(
     viewModel: NewsViewModel = hiltViewModel()
 ) {
 
-    val uriHandler = LocalUriHandler.current
     val news = viewModel.getNews(newsSourceId).collectAsLazyPagingItems()
 
     Column {
@@ -77,7 +77,10 @@ fun NewsScreen(
             ) { index ->
                 news[index]?.let { article ->
                     NewsCardItem(
-                        item = article,
+                        articleUrl = article.url,
+                        articleTitle = article.title,
+                        articlePublishedAt = article.publishedAt,
+                        articleDescription = article.description,
                         onClick = {
                             navigator.navigate(OpenWebViewDestination(it))
                         }

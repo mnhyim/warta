@@ -5,7 +5,7 @@ import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.mnhyim.news.destinations.CategoriesScreenDestination
-import com.mnhyim.news.destinations.SearchScreenDestination
+import com.mnhyim.search.destinations.SearchScreenDestination
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 
 enum class HomeNavigationBarDestinations(

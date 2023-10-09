@@ -1,4 +1,4 @@
-package com.mnhyim.news.news
+package com.mnhyim.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,17 +11,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mnhyim.domain.model.articles.ArticleModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsCardItem(
-    item: ArticleModel,
+    articleUrl: String,
+    articleTitle: String,
+    articlePublishedAt: String,
+    articleDescription: String,
     onClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        onClick = { onClick(item.url) },
+        onClick = { onClick(articleUrl) },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary,
         ),
@@ -29,23 +31,15 @@ fun NewsCardItem(
     ) {
 
         Text(
-            text = item.title,
+            text = articleTitle,
             style = MaterialTheme.typography.labelLarge,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.tertiary)
                 .padding(8.dp)
         )
-//        Text(
-//            text = "${item.author} [${item.source}]",
-//            style = MaterialTheme.typography.bodySmall,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.75f))
-//                .padding(8.dp, 4.dp)
-//        )
         Text(
-            text = item.publishedAt,
+            text = articlePublishedAt,
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier
                 .fillMaxWidth()
@@ -53,7 +47,7 @@ fun NewsCardItem(
                 .padding(8.dp, 4.dp)
         )
         Text(
-            text = item.description,
+            text = articleDescription,
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(12.dp)
         )
