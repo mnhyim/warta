@@ -1,6 +1,6 @@
 package com.mnhyim.warta.navigation
 
-import com.mnhyim.home.HomeNavGraph
+import com.mnhyim.news.HomeNavGraph
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import com.ramcosta.composedestinations.spec.Route

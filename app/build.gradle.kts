@@ -64,7 +64,7 @@ dependencies {
     implementation(project(":common:ui"))
     implementation(project(":data:network"))
     implementation(project(":domain"))
-    implementation(project(":feature:home"))
+    implementation(project(":feature:news"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")

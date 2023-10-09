@@ -6,7 +6,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.mnhyim.home.HomeNavGraph
+import com.mnhyim.news.HomeNavGraph
 import com.mnhyim.warta.utils.HomeNavigationBarDestinations
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
