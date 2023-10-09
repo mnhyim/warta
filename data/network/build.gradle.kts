@@ -9,16 +9,23 @@ plugins {
 android {
     namespace = "com.mnhyim.network"
     compileSdk = 33
+    android.buildFeatures.buildConfig = true
 
     defaultConfig {
         minSdk = 26
+
+        buildConfigField("String", "API_KEY", providers.gradleProperty("API_KEY").get())
+        buildConfigField("String", "API_LINK", providers.gradleProperty("API_LINK").get())
+        buildConfigField("String", "API_VERSION", providers.gradleProperty("API_VERSION").get())
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
+
     buildTypes {
         release {
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

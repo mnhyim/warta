@@ -1,6 +1,7 @@
 package com.mnhyim.network.di
 
 import com.mnhyim.domain.repository.NewsRepository
+import com.mnhyim.network.BuildConfig
 import com.mnhyim.network.NewsApi
 import com.mnhyim.network.repository.NewsRepositoryImpl
 import dagger.Module
@@ -27,7 +28,7 @@ object DataModule {
             .addInterceptor(httpLoggingInterceptor)
             .build()
         return Retrofit.Builder()
-            .baseUrl("https://newsapi.org" + "/v2/")
+            .baseUrl(BuildConfig.API_LINK + BuildConfig.API_VERSION)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
             .build()
