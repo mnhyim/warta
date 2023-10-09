@@ -6,7 +6,6 @@ import com.mnhyim.domain.model.sources.SourceModel
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
-    fun getCryptoNews(): Flow<PagingData<ArticleModel>>
     fun getSourcesByCategory(category: String): Flow<PagingData<SourceModel>>
     fun getNewsBySource(source: String): Flow<PagingData<ArticleModel>>
 }

@@ -1,7 +1,6 @@
 package com.mnhyim.domain.di
 
 import com.mnhyim.domain.repository.NewsRepository
-import com.mnhyim.domain.usecase.GetCryptoNews
 import com.mnhyim.domain.usecase.GetNewsBySourceUseCase
 import com.mnhyim.domain.usecase.GetSourcesByCategoryUseCase
 import com.mnhyim.domain.usecase.NewsUseCases
@@ -19,7 +18,6 @@ object UseCaseModule {
     @Provides
     fun provideNewsUseCases(repository: NewsRepository): NewsUseCases {
         return NewsUseCases(
-            getCryptoNews = GetCryptoNews(repository),
             getSourcesByCategoryUseCase = GetSourcesByCategoryUseCase(repository),
             getNewsBySourceUseCase = GetNewsBySourceUseCase(repository)
         )

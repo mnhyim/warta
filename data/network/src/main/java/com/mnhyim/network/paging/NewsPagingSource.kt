@@ -9,6 +9,7 @@ import java.util.Locale
 
 class NewsPagingSource(
     private val newsApi: NewsApi,
+    private val source: String
 ) : PagingSource<Int, ArticleModel>() {
     override fun getRefreshKey(state: PagingState<Int, ArticleModel>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -20,7 +21,7 @@ class NewsPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleModel> {
         return try {
             val page = params.key ?: 1
-            val response = newsApi.getCryptoNews(page = page)
+            val response = newsApi.getTopHeadlines(source = source, page = page)
 
             LoadResult.Page(
                 data = response.articles.map { article ->

@@ -7,15 +7,6 @@ import retrofit2.http.Query
 
 interface NewsApi {
 
-    /* TODO: delete later ig */
-    @GET("everything")
-    suspend fun getCryptoNews(
-        @Query("q") country: String = "crypto",
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int = 10,
-        @Query("sortBy") sortBy: String = "popularity",
-        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
-    ): TopHeadlinesResponse
 
     @GET("top-headlines/sources")
     suspend fun getSources(
@@ -27,20 +18,20 @@ interface NewsApi {
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): SourcesResponse
 
-    @GET("top-headlines")
-    suspend fun getTopHeadlines(
-        @Query("source") source: String,
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int = 5,
-        @Query("sortBy") sortBy: String = "popularity",
-        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
-    ): TopHeadlinesResponse
-
     @GET("everything")
     suspend fun searchNews(
         @Query("page") page: Int,
         @Query("q") country: String,
         @Query("pageSize") pageSize: Int = 10,
+        @Query("sortBy") sortBy: String = "popularity",
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
+    ): TopHeadlinesResponse
+
+    @GET("top-headlines")
+    suspend fun getTopHeadlines(
+        @Query("sources") source: String,
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int = 5,
         @Query("sortBy") sortBy: String = "popularity",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): TopHeadlinesResponse

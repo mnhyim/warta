@@ -14,11 +14,6 @@ import javax.inject.Inject
 class NewsRepositoryImpl @Inject constructor(
     private val newsApi: NewsApi
 ) : NewsRepository {
-    override fun getCryptoNews() = Pager(
-        config = PagingConfig(pageSize = 10),
-        pagingSourceFactory = { NewsPagingSource(newsApi) }
-    ).flow
-
     override fun getSourcesByCategory(category: String) = Pager(
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { SourcesPagingSource(newsApi, category) }
@@ -26,6 +21,6 @@ class NewsRepositoryImpl @Inject constructor(
 
     override fun getNewsBySource(source: String): Flow<PagingData<ArticleModel>> = Pager(
         config = PagingConfig(pageSize = 10),
-        pagingSourceFactory = { NewsPagingSource(newsApi) }
+        pagingSourceFactory = { NewsPagingSource(newsApi, source) }
     ).flow
 }
