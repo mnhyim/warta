@@ -15,7 +15,8 @@ import com.ramcosta.composedestinations.utils.currentDestinationAsState
 fun HomeNavigationBar(
     navController: NavController
 ) {
-    val currentDestination = navController.currentDestinationAsState().value ?: NewsNavGraph.startRoute
+    val currentDestination =
+        navController.currentDestinationAsState().value ?: NewsNavGraph.startRoute
 
     NavigationBar(
         contentColor = MaterialTheme.colorScheme.primary,

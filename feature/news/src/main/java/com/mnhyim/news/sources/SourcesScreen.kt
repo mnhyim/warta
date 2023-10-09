@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,9 +44,11 @@ fun SourcesScreen(
     ) {
 
         Text(
-            text = "$category",
+            text = category,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
+            fontFamily = FontFamily.Serif,
+            modifier = Modifier.padding(16.dp)
         )
 
         LazyVerticalStaggeredGrid(
@@ -62,7 +65,11 @@ fun SourcesScreen(
             ) { index ->
                 sources[index]?.let { source ->
                     SourcesCardItem(
-                        item = source,
+                        id = source.id,
+                        name = source.name,
+                        description = source.description,
+                        language = source.language,
+                        country = source.country,
                         onClick = { id, name, description ->
                             navigator.navigate(NewsScreenDestination(id, name, description))
                         }

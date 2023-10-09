@@ -17,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -49,10 +50,11 @@ fun SearchScreen(
             .padding(8.dp)
     ) {
         Text(
-            text = "Search global news",
+            text = "Search Global News!",
             textAlign = TextAlign.Center,
+            fontFamily = FontFamily.Serif,
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp)d
         )
         SearchBar(
             text = searchQuery,

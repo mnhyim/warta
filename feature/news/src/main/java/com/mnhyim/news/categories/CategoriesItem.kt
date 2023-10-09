@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -32,13 +33,15 @@ fun CategoriesItem(
             Icon(
                 imageVector = item.icon,
                 contentDescription = "",
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.scale(1.5f)
             )
             Text(
-                text = "${item.category}",
+                text = item.category,
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.labelSmall,
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
+                style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp)
             )
         }
     }

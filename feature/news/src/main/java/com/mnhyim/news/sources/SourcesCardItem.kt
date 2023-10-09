@@ -12,18 +12,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mnhyim.domain.model.sources.SourceModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SourcesCardItem(
-    item: SourceModel,
+    id: String,
+    name: String,
+    description: String,
+    language: String,
+    country: String,
     onClick: (String, String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        onClick = { onClick(item.id, item.name, item.description) },
+        onClick = { onClick(id, name, description) },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary,
         ),
@@ -31,8 +36,9 @@ fun SourcesCardItem(
     ) {
 
         Text(
-            text = item.name,
+            text = name,
             style = MaterialTheme.typography.labelLarge,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.tertiary)
@@ -46,18 +52,18 @@ fun SourcesCardItem(
                 .padding(8.dp, 4.dp)
         ) {
             Text(
-                text = item.country.uppercase(),
-                style = MaterialTheme.typography.bodySmall,
+                text = "Country: ${country.uppercase()}",
+                style = MaterialTheme.typography.labelSmall,
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = item.language.uppercase(),
-                style = MaterialTheme.typography.bodySmall,
+                text = "Language: ${language.uppercase()}",
+                style = MaterialTheme.typography.labelSmall,
             )
         }
 
         Text(
-            text = item.description,
+            text = description,
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(12.dp)
         )
