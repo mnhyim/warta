@@ -1,6 +1,7 @@
 package com.mnhyim.network
 
-import com.mnhyim.network.dto.TopHeadlinesResponse
+import com.mnhyim.network.dto.articles.TopHeadlinesResponse
+import com.mnhyim.network.dto.sources.SourcesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,8 +10,27 @@ interface NewsApi {
 
     @GET("everything")
     suspend fun getCryptoNews(
-        @Query("page") page: Int,
         @Query("q") country: String = "crypto",
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int = 10,
+        @Query("sortBy") sortBy: String = "popularity",
+        @Query("apiKey") apiKey: String = "e05e69123d064fb4a0b6377b73927357"
+    ): TopHeadlinesResponse
+
+    @GET("top-headlines/sources")
+    suspend fun getSources(
+        @Query("category") category: String,
+        @Query("language") language: String,
+        @Query("sortBy") sortBy: String = "popularity",
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int = 10,
+        @Query("apiKey") apiKey: String = "e05e69123d064fb4a0b6377b73927357"
+    ): SourcesResponse
+
+    @GET("everything")
+    suspend fun searchNews(
+        @Query("page") page: Int,
+        @Query("q") country: String,
         @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity",
         @Query("apiKey") apiKey: String = "e05e69123d064fb4a0b6377b73927357"

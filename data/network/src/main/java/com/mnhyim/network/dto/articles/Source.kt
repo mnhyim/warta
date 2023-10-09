@@ -1,4 +1,4 @@
-package com.mnhyim.network.dto
+package com.mnhyim.network.dto.articles
 
 
 import com.squareup.moshi.Json

@@ -2,7 +2,7 @@ package com.mnhyim.home.news
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
-import com.mnhyim.domain.model.ArticleModel
+import com.mnhyim.domain.model.articles.ArticleModel
 import com.mnhyim.domain.usecase.NewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -17,10 +17,6 @@ class NewsViewModel @Inject constructor(
 
     private var _state = MutableStateFlow(NewsState())
     val state = _state.asStateFlow()
-
-    init {
-//        getTopHeadlines()
-    }
 
     fun getCryptoNews(): Flow<PagingData<ArticleModel>> = newsUseCases.getCryptoNews()
 

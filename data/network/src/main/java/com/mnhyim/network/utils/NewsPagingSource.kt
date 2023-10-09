@@ -3,7 +3,7 @@ package com.mnhyim.network.utils
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mnhyim.network.NewsApi
-import com.mnhyim.domain.model.ArticleModel
+import com.mnhyim.domain.model.articles.ArticleModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 

@@ -1,4 +1,4 @@
-package com.mnhyim.domain.model
+package com.mnhyim.domain.model.articles
 
 
 data class ArticleModel(

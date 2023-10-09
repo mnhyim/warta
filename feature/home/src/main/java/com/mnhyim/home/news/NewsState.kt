@@ -1,6 +1,6 @@
 package com.mnhyim.home.news
 
-import com.mnhyim.domain.model.ArticleModel
+import com.mnhyim.domain.model.articles.ArticleModel
 
 data class NewsState(
     val isLoading: Boolean = true,

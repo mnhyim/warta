@@ -13,7 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mnhyim.domain.model.ArticleModel
+import com.mnhyim.domain.model.articles.ArticleModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

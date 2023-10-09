@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import com.mnhyim.domain.repository.NewsRepository
 import com.mnhyim.network.NewsApi
 import com.mnhyim.network.utils.NewsPagingSource
+import com.mnhyim.network.utils.SourcesPagingSource
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
@@ -13,5 +14,10 @@ class NewsRepositoryImpl @Inject constructor(
     override fun getCryptoNews() = Pager(
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { NewsPagingSource(newsApi) }
+    ).flow
+
+    override fun getSourcesByCategory(category: String) = Pager(
+        config = PagingConfig(pageSize = 10),
+        pagingSourceFactory = { SourcesPagingSource(newsApi, category) }
     ).flow
 }
