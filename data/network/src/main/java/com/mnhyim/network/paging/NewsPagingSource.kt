@@ -1,4 +1,4 @@
-package com.mnhyim.network.utils
+package com.mnhyim.network.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -48,6 +48,6 @@ class NewsPagingSource(
 private fun convertUTC(dateTime: String): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
     val date = dateFormat.parse(dateTime)
-    val formatter = SimpleDateFormat("dd-MM-yyyy")
+    val formatter = SimpleDateFormat("EE, dd MMM yyyy")
     return formatter.format(date)
 }

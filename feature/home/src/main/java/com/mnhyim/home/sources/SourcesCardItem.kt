@@ -19,11 +19,11 @@ import com.mnhyim.domain.model.sources.SourceModel
 @Composable
 fun SourcesCardItem(
     item: SourceModel,
-    onClick: (String) -> Unit,
+    onClick: (String, String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        onClick = { /*TODO*/ },
+        onClick = { onClick(item.id, item.name, item.description) },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary,
         ),

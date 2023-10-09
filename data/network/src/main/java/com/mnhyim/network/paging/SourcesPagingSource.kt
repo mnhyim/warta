@@ -1,4 +1,4 @@
-package com.mnhyim.network.utils
+package com.mnhyim.network.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

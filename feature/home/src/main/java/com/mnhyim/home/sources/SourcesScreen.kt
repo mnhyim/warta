@@ -7,10 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material3.CircularProgressIndicator
@@ -25,18 +21,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
-import androidx.paging.compose.itemKey
-import com.mnhyim.home.news.NewsItem
+import com.mnhyim.home.destinations.NewsScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
 fun SourcesScreen(
     category: String,
+    navigator: DestinationsNavigator,
     viewModel: SourcesViewModel = hiltViewModel()
 ) {
 
-    val sources = viewModel.getSources().collectAsLazyPagingItems()
+    val sources = viewModel.getSources(category).collectAsLazyPagingItems()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,13 +58,14 @@ fun SourcesScreen(
         ) {
             items(
                 count = sources.itemCount,
-                key = sources.itemKey { it.id },
                 contentType = sources.itemContentType { "Articles" }
             ) { index ->
                 sources[index]?.let { source ->
                     SourcesCardItem(
                         item = source,
-                        onClick = {  }
+                        onClick = { id, name, description ->
+                            navigator.navigate(NewsScreenDestination(id, name, description))
+                        }
                     )
                 }
             }
@@ -76,6 +74,7 @@ fun SourcesScreen(
                 is LoadState.Error -> {
                     Log.d("Paging", "E: ${state.error}")
                 }
+
                 is LoadState.Loading -> {
                     item {
                         Box(
@@ -86,6 +85,7 @@ fun SourcesScreen(
                         }
                     }
                 }
+
                 else -> {}
             }
 
@@ -93,6 +93,7 @@ fun SourcesScreen(
                 is LoadState.Error -> {
                     Log.d("Paging", "E: ${state.error}")
                 }
+
                 is LoadState.Loading -> {
                     item {
                         Box(
@@ -103,6 +104,7 @@ fun SourcesScreen(
                         }
                     }
                 }
+
                 else -> {}
             }
         }

@@ -15,9 +15,6 @@ class SourcesViewModel @Inject constructor(
     private val newsUseCases: NewsUseCases
 ): ViewModel() {
 
-    private var _state = MutableStateFlow(SourcesState())
-    val state = _state.asStateFlow()
-
-    fun getSources(): Flow<PagingData<SourceModel>> = newsUseCases.getSourcesByCategoryUseCase(state.value.category)
+    fun getSources(category: String): Flow<PagingData<SourceModel>> = newsUseCases.getSourcesByCategoryUseCase(category)
 
 }

@@ -17,12 +17,13 @@ import com.mnhyim.domain.model.articles.ArticleModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsItem(
+fun NewsCardItem(
     item: ArticleModel,
+    onClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        onClick = { /*TODO*/ },
+        onClick = { onClick(item.url) },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary,
         ),
@@ -37,24 +38,22 @@ fun NewsItem(
                 .background(MaterialTheme.colorScheme.tertiary)
                 .padding(8.dp)
         )
-
-        Row(
+//        Text(
+//            text = "${item.author} [${item.source}]",
+//            style = MaterialTheme.typography.bodySmall,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.75f))
+//                .padding(8.dp, 4.dp)
+//        )
+        Text(
+            text = item.publishedAt,
+            style = MaterialTheme.typography.bodySmall,
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.75f))
+                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.5f))
                 .padding(8.dp, 4.dp)
-        ) {
-            Text(
-                text = "${item.author} [${item.source}]",
-                style = MaterialTheme.typography.bodySmall,
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = item.publishedAt,
-                style = MaterialTheme.typography.bodySmall,
-            )
-        }
-
+        )
         Text(
             text = item.description,
             style = MaterialTheme.typography.bodySmall,

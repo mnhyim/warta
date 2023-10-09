@@ -1,86 +1,130 @@
 package com.mnhyim.home.news
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
-import androidx.paging.compose.itemKey
+import com.mnhyim.home.components.OpenWebView
+import com.mnhyim.home.destinations.NewsScreenDestination
+import com.mnhyim.home.destinations.OpenWebViewDestination
+import com.mnhyim.home.sources.SourcesCardItem
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@RootNavGraph(start = true)
 @Destination
 @Composable
 fun NewsScreen(
-    viewModel: NewsViewModel = hiltViewModel(),
-    modifier: Modifier = Modifier
+    navigator: DestinationsNavigator,
+    newsSourceId: String,
+    newsSourceName: String,
+    newsSourceDescription: String,
+    viewModel: NewsViewModel = hiltViewModel()
 ) {
-    val articles = viewModel.getCryptoNews().collectAsLazyPagingItems()
 
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.padding(0.dp,8.dp)
-    ) {
-        items(
-            count = articles.itemCount,
-            contentType = articles.itemContentType { "Articles" }
-        ) { index ->
-            articles[index]?.let { article ->
-                NewsItem(
-                    item = article,
-                    modifier = Modifier.padding(8.dp, 0.dp)
-                )
-            }
+    val uriHandler = LocalUriHandler.current
+    val news = viewModel.getNews(newsSourceId).collectAsLazyPagingItems()
+
+    Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.background(MaterialTheme.colorScheme.primary)
+        ) {
+            Text(
+                text = newsSourceName,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.padding(16.dp)
+            )
+            Text(
+                text = newsSourceDescription,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.25f))
+                    .padding(8.dp)
+            )
         }
-
-        when (val state = articles.loadState.refresh) {
-            is LoadState.Error -> {
-                Log.d("Paging", "E: ${state.error}")
-            }
-
-            is LoadState.Loading -> {
-                item {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillParentMaxSize(),
-                    ) {
-                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-                    }
+        LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Fixed(2),
+            verticalItemSpacing = 8.dp,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxSize()
+        ) {
+            items(
+                count = news.itemCount,
+                contentType = news.itemContentType { "Articles" }
+            ) { index ->
+                news[index]?.let { article ->
+                    NewsCardItem(
+                        item = article,
+                        onClick = {
+                            navigator.navigate(OpenWebViewDestination(it))
+                        }
+                    )
                 }
             }
 
-            else -> {}
-        }
+            when (val state = news.loadState.refresh) {
+                is LoadState.Error -> {
+                    Log.d("Paging", "E: ${state.error}")
+                }
 
-        when (val state = articles.loadState.append) {
-            is LoadState.Error -> {
-                Log.d("Paging", "E: ${state.error}")
-            }
-
-            is LoadState.Loading -> {
-                item {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillParentMaxSize(),
-                    ) {
-                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                is LoadState.Loading -> {
+                    item {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                        }
                     }
                 }
+
+                else -> {}
             }
 
-            else -> {}
+            when (val state = news.loadState.append) {
+                is LoadState.Error -> {
+                    Log.d("Paging", "E: ${state.error}")
+                }
+
+                is LoadState.Loading -> {
+                    item {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                        }
+                    }
+                }
+
+                else -> {}
+            }
         }
     }
 }
