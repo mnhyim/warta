@@ -85,6 +85,9 @@ fun SearchScreen(
                             articleDescription = article.description,
                             onClick = {
                                 navigator.navigate(OpenSearchWebViewDestination(it))
+                            },
+                            onSave = {
+                                viewModel.saveArticle(article)
                             }
                         )
                     }

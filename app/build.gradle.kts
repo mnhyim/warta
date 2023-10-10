@@ -62,7 +62,7 @@ android {
 dependencies {
 
     implementation(project(":common:ui"))
-    implementation(project(":data:network"))
+    implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":feature:news"))
     implementation(project(":feature:search"))

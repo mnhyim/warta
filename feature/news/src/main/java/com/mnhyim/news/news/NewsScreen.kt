@@ -91,7 +91,8 @@ fun NewsScreen(
                         articleDescription = article.description,
                         onClick = {
                             navigator.navigate(OpenWebViewDestination(it))
-                        }
+                        },
+                        onSave = {}
                     )
                 }
             }

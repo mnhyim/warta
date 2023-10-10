@@ -4,6 +4,7 @@ import com.mnhyim.domain.repository.NewsRepository
 import com.mnhyim.domain.usecase.GetNewsBySourceUseCase
 import com.mnhyim.domain.usecase.GetSourcesByCategoryUseCase
 import com.mnhyim.domain.usecase.NewsUseCases
+import com.mnhyim.domain.usecase.SaveNewsUseCase
 import com.mnhyim.domain.usecase.SearchNewsUseCase
 import dagger.Module
 import dagger.Provides
@@ -21,7 +22,8 @@ object UseCaseModule {
         return NewsUseCases(
             getSourcesByCategoryUseCase = GetSourcesByCategoryUseCase(repository),
             getNewsBySourceUseCase = GetNewsBySourceUseCase(repository),
-            searchNewsUseCase = SearchNewsUseCase(repository)
+            searchNewsUseCase = SearchNewsUseCase(repository),
+            saveNewsUseCase = SaveNewsUseCase(repository)
         )
     }
 }

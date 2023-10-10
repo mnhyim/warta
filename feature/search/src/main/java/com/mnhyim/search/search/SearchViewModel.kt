@@ -39,4 +39,6 @@ class SearchViewModel @Inject constructor(
             }
         }
 
+    fun saveArticle(article: ArticleModel) = newsUseCases.saveNewsUseCase(article)
+
 }

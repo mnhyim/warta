@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +24,7 @@ fun NewsCardItem(
     articlePublishedAt: String,
     articleDescription: String,
     onClick: (String) -> Unit,
+    onSave: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -58,5 +60,8 @@ fun NewsCardItem(
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(12.dp)
         )
+        Button(onClick = { onSave() }) {
+            Text(text = "Save")
+        }
     }
 }
