@@ -1,5 +1,6 @@
 package com.mnhyim.warta.navigation
 
+import com.mnhyim.favorite.FavoriteNavGraph
 import com.mnhyim.news.NewsNavGraph
 import com.mnhyim.search.SearchNavGraph
 import com.ramcosta.composedestinations.spec.DestinationSpec
@@ -16,6 +17,7 @@ object RootNavGraph : NavGraphSpec {
 
     override val nestedNavGraphs: List<NavGraphSpec> = listOf(
         NewsNavGraph,
-        SearchNavGraph
+        SearchNavGraph,
+        FavoriteNavGraph
     )
 }

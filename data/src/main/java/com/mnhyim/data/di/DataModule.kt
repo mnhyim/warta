@@ -1,5 +1,7 @@
-package com.mnhyim.data.remote.di
+package com.mnhyim.data.di
 
+import android.content.Context
+import androidx.room.Room
 import com.mnhyim.domain.repository.NewsRepository
 import com.mnhyim.data.BuildConfig
 import com.mnhyim.data.local.database.AppDatabase
@@ -8,6 +10,7 @@ import com.mnhyim.data.repository.NewsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,8 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
-
+object DataModule {
 
     @Provides
     @Singleton
@@ -40,5 +42,16 @@ object NetworkModule {
     @Singleton
     fun provideNewsRepository(api: NewsApi, database: AppDatabase): NewsRepository {
         return NewsRepositoryImpl(api, database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(
+        @ApplicationContext context: Context
+    ): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java, "articles-database"
+        ).build()
     }
 }

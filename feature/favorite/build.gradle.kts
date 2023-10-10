@@ -1,6 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
 
     kotlin("kapt")
     alias(libs.plugins.kotlin.ksp)
@@ -8,26 +9,14 @@ plugins {
 }
 
 android {
-    namespace = "com.mnhyim.warta"
-    compileSdk = 34
-
-    applicationVariants.all {
-        addJavaSourceFoldersToModel(
-            File(buildDir, "generated/ksp/$name/kotlin")
-        )
-    }
+    namespace = "com.mnhyim.favorite"
+    compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.mnhyim.warta"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -52,21 +41,23 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-
     implementation(project(":common:ui"))
-    implementation(project(":data"))
+    implementation(project(":common:utils"))
     implementation(project(":domain"))
-    implementation(project(":feature:news"))
-    implementation(project(":feature:search"))
-    implementation(project(":feature:favorite"))
+
+    implementation(libs.compose.destinations.core)
+    ksp(libs.compose.destinations.ksp)
+
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.android.gradle.plugin)
+    implementation(libs.dagger.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.android.compiler)
+
+    implementation(libs.bundles.paging3)
+    implementation(libs.material.icons.extended)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -81,17 +72,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-
-    implementation(libs.dagger.hilt.android)
-    implementation(libs.dagger.hilt.android.gradle.plugin)
-    kapt(libs.dagger.hilt.android.compiler)
-
-    implementation(libs.compose.destinations.core)
-    ksp(libs.compose.destinations.ksp)
-
-    implementation(libs.material.icons.extended)
 }
-
-kapt {
-    correctErrorTypes = true
+ksp {
+    arg("compose-destinations.mode", "navgraphs")
+    arg("compose-destinations.moduleName", "favorite")
+    arg("compose-destinations.useComposableVisibility", "true")
 }

@@ -5,13 +5,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -60,8 +65,8 @@ fun NewsCardItem(
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(12.dp)
         )
-        Button(onClick = { onSave() }) {
-            Text(text = "Save")
+        IconButton(onClick = { onSave() }, modifier = Modifier.scale(0.5f.)) {
+            Icon(imageVector = Icons.Default.Favorite, contentDescription = "")
         }
     }
 }

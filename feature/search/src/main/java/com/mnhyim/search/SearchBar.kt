@@ -1,4 +1,4 @@
-package com.mnhyim.search.search
+package com.mnhyim.search
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

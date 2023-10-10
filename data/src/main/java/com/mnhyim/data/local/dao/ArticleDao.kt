@@ -5,13 +5,13 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.mnhyim.data.local.entity.ArticleEntity
-import com.mnhyim.domain.model.articles.ArticleModel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface NewsDao {
+interface ArticleDao {
 
-    @Query("SELECT * FROM news")
-    fun getAll(): List<ArticleEntity>
+    @Query("SELECT * FROM article")
+    fun getAll(): Flow<List<ArticleEntity>>
 
     @Insert
     fun insert(news: ArticleEntity)

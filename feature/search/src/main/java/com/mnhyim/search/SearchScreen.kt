@@ -1,4 +1,4 @@
-package com.mnhyim.search.search
+package com.mnhyim.search
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement

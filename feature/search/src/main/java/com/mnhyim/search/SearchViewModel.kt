@@ -1,4 +1,4 @@
-package com.mnhyim.search.search
+package com.mnhyim.search
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData

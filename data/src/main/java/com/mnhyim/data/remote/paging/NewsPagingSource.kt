@@ -27,13 +27,11 @@ class NewsPagingSource(
                 data = response.articles.map { article ->
                     ArticleModel(
                         author = article.author ?: "-",
-                        content = article.content ?: "-",
                         description = article.description ?: "-",
                         publishedAt = article.publishedAt?.let { convertUTC(it) } ?: "-",
                         source = article.source?.name ?: "-",
                         title = article.title.toString(),
                         url = article.url ?: "-",
-                        urlToImage = article.urlToImage ?: "-"
                     )
                 },
                 prevKey = null,

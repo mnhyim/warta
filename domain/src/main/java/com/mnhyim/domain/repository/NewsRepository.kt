@@ -10,5 +10,6 @@ interface NewsRepository {
     fun getNewsBySource(source: String): Flow<PagingData<ArticleModel>>
     fun searchNews(query: String, sources: String): Flow<PagingData<ArticleModel>>
 
-    fun saveNews(news: ArticleModel)
+    fun saveNews(article: ArticleModel)
+    fun getFavoriteNews(): Flow<List<ArticleModel>>
 }

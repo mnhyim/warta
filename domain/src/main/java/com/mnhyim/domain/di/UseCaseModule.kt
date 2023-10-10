@@ -1,6 +1,7 @@
 package com.mnhyim.domain.di
 
 import com.mnhyim.domain.repository.NewsRepository
+import com.mnhyim.domain.usecase.GetFavoriteNewsUseCase
 import com.mnhyim.domain.usecase.GetNewsBySourceUseCase
 import com.mnhyim.domain.usecase.GetSourcesByCategoryUseCase
 import com.mnhyim.domain.usecase.NewsUseCases
@@ -23,7 +24,8 @@ object UseCaseModule {
             getSourcesByCategoryUseCase = GetSourcesByCategoryUseCase(repository),
             getNewsBySourceUseCase = GetNewsBySourceUseCase(repository),
             searchNewsUseCase = SearchNewsUseCase(repository),
-            saveNewsUseCase = SaveNewsUseCase(repository)
+            saveNewsUseCase = SaveNewsUseCase(repository),
+            getFavoriteNews = GetFavoriteNewsUseCase(repository)
         )
     }
 }

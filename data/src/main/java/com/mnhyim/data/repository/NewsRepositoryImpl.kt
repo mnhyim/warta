@@ -3,19 +3,18 @@ package com.mnhyim.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.room.Database
-import com.mnhyim.data.local.dao.NewsDao
 import com.mnhyim.data.local.database.AppDatabase
 import com.mnhyim.data.local.entity.ArticleEntity
-import com.mnhyim.domain.model.articles.ArticleModel
-import com.mnhyim.domain.repository.NewsRepository
 import com.mnhyim.data.remote.NewsApi
 import com.mnhyim.data.remote.paging.NewsPagingSource
 import com.mnhyim.data.remote.paging.SearchPagingSource
 import com.mnhyim.data.remote.paging.SourcesPagingSource
+import com.mnhyim.domain.model.articles.ArticleModel
+import com.mnhyim.domain.repository.NewsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,18 +37,33 @@ class NewsRepositoryImpl @Inject constructor(
         pagingSourceFactory = { SearchPagingSource(newsApi, query, sources) }
     ).flow
 
-    override fun saveNews(news: ArticleModel) {
+    override fun saveNews(article: ArticleModel) {
         CoroutineScope(IO).launch {
             appDatabase.newsDao().insert(
                 ArticleEntity(
-                    author = news.author,
+                    author = article.author,
                     date = 0,
-                    description = news.description,
-                    source = news.source,
-                    title = news.title,
-                    url = news.url,
+                    description = article.description,
+                    source = article.source,
+                    title = article.title,
+                    url = article.url,
                 )
             )
+        }
+    }
+
+    override fun getFavoriteNews(): Flow<List<ArticleModel>> {
+        return appDatabase.newsDao().getAll().map { favorites ->
+            favorites.map { article ->
+                ArticleModel(
+                    author = article.author ?: "-",
+                    publishedAt = "", // TODO: Deal with date stuff
+                    description = article.description ?: "-",
+                    source = article.source ?: "-",
+                    title = article.title ?: "-",
+                    url = article.url ?: "-",
+                )
+            }
         }
     }
 }
